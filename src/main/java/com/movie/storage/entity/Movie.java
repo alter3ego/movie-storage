@@ -1,4 +1,4 @@
-package com.movie.storage.moviestorage.entity;
+package com.movie.storage.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
