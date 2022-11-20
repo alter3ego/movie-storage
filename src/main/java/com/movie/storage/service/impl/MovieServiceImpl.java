@@ -10,6 +10,10 @@ import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
+import static java.time.temporal.TemporalAdjusters.lastDayOfYear;
 
 @Service
 @AllArgsConstructor
@@ -33,7 +37,21 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Slice<Movie> getMoviesBetweenDates(LocalDate startDate, LocalDate endDate, Pageable pageable) {
+    public void saveMovie(Movie movie) {
+        movieRepository.save(movie);
+    }
+
+    @Override
+    public void saveMovies(List<Movie> movies) {
+        movieRepository.saveAll(movies);
+    }
+
+    @Override
+    public Slice<Movie> getMoviesByYear(int year, Pageable pageable) {
+        LocalDate instance = LocalDate.now().withYear(year);
+        LocalDate startDate = instance.with(firstDayOfYear());
+        LocalDate endDate = instance.with(lastDayOfYear());
+
         return movieRepository.findAllByReleaseDateBetween(startDate, endDate, pageable);
     }
 }

@@ -12,11 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-
-import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
-import static java.time.temporal.TemporalAdjusters.lastDayOfYear;
-
 @RestController
 @RequestMapping(value = "/movie-api/v1/getBy")
 @RequiredArgsConstructor
@@ -48,12 +43,8 @@ public class ReceivingController {
     }
 
     @RequestMapping("/year/{year}")
-    ResponseEntity<Slice<Movie>> getMoviesByYear(@PathVariable(value = "year") Integer year, Pageable pageable) {
-        LocalDate instance = LocalDate.now().withYear(year);
-        LocalDate dateStart = instance.with(firstDayOfYear());
-        LocalDate dateEnd = instance.with(lastDayOfYear());
-
-        Slice<Movie> movies = movieService.getMoviesBetweenDates(dateStart, dateEnd, pageable);
+    ResponseEntity<Slice<Movie>> getMoviesByYear(@PathVariable(value = "year") int year, Pageable pageable) {
+        Slice<Movie> movies = movieService.getMoviesByYear(year, pageable);
         return getSliceResponseEntity(movies);
     }
 

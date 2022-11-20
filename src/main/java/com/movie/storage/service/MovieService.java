@@ -5,7 +5,7 @@ import com.movie.storage.entity.Movie;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 
-import java.time.LocalDate;
+import java.util.List;
 
 public interface MovieService {
     Slice<Movie> getMoviesByGenre(String genre, Pageable pageable);
@@ -14,5 +14,9 @@ public interface MovieService {
 
     Slice<Movie> getMoviesByType(Type type, Pageable pageable);
 
-    Slice<Movie> getMoviesBetweenDates(LocalDate startDate, LocalDate endDate, Pageable pageable);
+    Slice<Movie> getMoviesByYear(int year, Pageable pageable);
+
+    void saveMovie(Movie movie);
+
+    void saveMovies(List<Movie> movies);
 }

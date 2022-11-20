@@ -14,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity
@@ -28,19 +30,27 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "The movie should have a title")
+    @Size(max = 255, message = "Title must be less than 255 characters")
     @Column(nullable = false)
     private String title;
 
+    @NotNull(message = "The movie should have a description")
+    @Size(max = 600, message = "Description must be less than 600 characters")
     @Column(nullable = false, length = 600)
     private String description;
 
+    @NotNull(message = "The movie should have a type")
     @Enumerated(EnumType.STRING)
     @Column(length = 30)
     private Type type;
 
+    @NotNull(message = "The movie should have a genre")
+    @Size(max = 255, message = "Genre must be less than 600 characters")
     @Column(nullable = false)
     private String genre;
 
-    @Column(name = "release_date")
+    @NotNull(message = "The movie should have a release date")
+    @Column(name = "release_date", nullable = false)
     private LocalDate releaseDate;
 }
