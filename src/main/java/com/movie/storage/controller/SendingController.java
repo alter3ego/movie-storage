@@ -17,12 +17,12 @@ import java.util.List;
 @RequestMapping(value = "/movie-api/v1/add")
 @RequiredArgsConstructor
 public class SendingController {
-        private final MovieService movieService;
+    private final MovieService movieService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/movie", method = RequestMethod.POST)
     public void addMovie(@RequestBody @Valid Movie movie) {
-       movieService.saveMovie(movie);
+        movieService.saveMovie(movie);
     }
 
     @ResponseStatus(HttpStatus.CREATED)

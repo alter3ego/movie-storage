@@ -1,16 +1,19 @@
 package com.movie.storage.entity;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.movie.storage.exception.TypeParsingException;
+
 public enum Type {
     FULL,
     SHORT,
     SERIAL;
 
-    public static boolean enumExist(String type) {
+    @JsonCreator
+    public static Type jsonParsing(String value) {
         try {
-            Type.valueOf(type);
-            return true;
+            return Type.valueOf(value.toUpperCase());
         } catch (IllegalArgumentException e) {
-            return false;
+            throw new TypeParsingException();
         }
     }
 }
