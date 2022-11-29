@@ -54,9 +54,9 @@ class AddControllerTest {
                                         {
                                           "title": "Movie Title",
                                           "description": "Title Description",
-                                          "type": "FULLt",
+                                          "type": "FULL",
                                           "genre": "crime, drama",
-                                          "releaseDate": "2023-09-14"
+                                          "releaseDate": "2023-099-14"
                                         }""".indent(2)
                         ))
                 .andExpect(content().contentType("application/json"))
